@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
+const Counter = require("./counter.model");
 
 const app = express();
 const PORT = process.env.PORT;
@@ -22,8 +23,20 @@ const connectDb = async () => {
   }
 };
 
-app.get("/", (req, res) => {
-  res.send("Hello World by CSEA :)");
+app.get("/", async (req, res) => {
+  try {
+    let counter = await Counter.findOne();
+    if (!counter) {
+      counter = await Counter.create({ value: 0 });
+    }
+
+    counter.value += 1;
+    await counter.save();
+
+    res.send(`Hello mongo by CSEA ${counter.value} times`);
+  } catch (error) {
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 app.listen(PORT, async () => {

@@ -1,0 +1,21 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: mongodb
+    volumes:
+      - mongo-data:/data/db
+  
+  mongo-app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: mongo-app
+    env_file:
+      - .env
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+
+volumes:
+  mongo-data:

@@ -6,4 +6,4 @@ This workshop is to give participants an idea about docker and what it does and 
 
 [Nadeem M Siyam](https://github.com/Centinoughty)
 
-[Nithin Raj](https://github.com/nithinraj)
+[Nithin Raj](https://github.com/nithinraj04)
